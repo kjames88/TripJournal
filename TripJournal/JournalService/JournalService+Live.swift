@@ -18,15 +18,30 @@ class JournalServiceLive: JournalService {
             .eraseToAnyPublisher()
     }
     
+    func constructUrlRequest(for endpoint: String, authorize: Bool, method: String, content: String?, accept: String?, body: Data?) -> URLRequest {
+        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/\(endpoint)")!)
+        urlRequest.httpMethod = method
+        if authorize, let token = token {
+            urlRequest.setValue("\(token.tokenType) \(token.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+        if let content = content {
+            urlRequest.setValue(content, forHTTPHeaderField: "content-type")
+        }
+        if let accept = accept {
+            urlRequest.setValue(accept, forHTTPHeaderField: "accept")
+        }
+        if let body = body {
+            urlRequest.httpBody = body
+        }
+        
+        return urlRequest
+    }
+    
     func register(username: String, password: String) async throws -> Token {
         let body = RegisterUser(username: username, password: password)
         let encoded = try JSONEncoder().encode(body)
         
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/register")!)
-        urlRequest.setValue("application/json", forHTTPHeaderField: "content-type")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.httpMethod = "POST"
-        urlRequest.httpBody = encoded
+        let urlRequest = constructUrlRequest(for: "register", authorize: false, method: "POST", content: "application/json", accept: "application/json", body: encoded)
         
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse else { //}, httpResponse.statusCode == 200 else {
@@ -47,18 +62,15 @@ class JournalServiceLive: JournalService {
     }
     
     func logIn(username: String, password: String) async throws -> Token {
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/token")!)
-        urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.httpMethod = "POST"
         // Thanks to ChatGPT for this:
-        urlRequest.httpBody = "grant_type=&username=\(username)&password=\(password)".data(using: .utf8)
+        let httpBody = "grant_type=&username=\(username)&password=\(password)".data(using: .utf8)
         
+        let urlRequest = constructUrlRequest(for: "token", authorize: false, method: "POST", content: "application/x-www-form-urlencoded", accept: "application/json", body: httpBody)
+                
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
-        guard let httpResponse = response as? HTTPURLResponse else { //}, httpResponse.statusCode == 200 else {
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        print("status code: \(httpResponse.statusCode)")
         do {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -82,13 +94,8 @@ class JournalServiceLive: JournalService {
         encoder.keyEncodingStrategy = .convertToSnakeCase
         
         let encoded = try encoder.encode(request)
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/trips")!)
-        urlRequest.setValue("application/json", forHTTPHeaderField: "content-type")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.setValue("\(token!.tokenType) \(token!.accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpMethod = "POST"
-        urlRequest.httpBody = encoded
-        
+        let urlRequest = constructUrlRequest(for: "trips", authorize: true, method: "POST", content: "application/json", accept: "application/json", body: encoded)
+              
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse else { //}, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
@@ -112,15 +119,8 @@ class JournalServiceLive: JournalService {
     }
     
     func getTrips() async throws -> [Trip] {
-        //print("token: \(token!.accessToken)")
-        
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/trips")!)
-        urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.setValue("\(token!.tokenType) \(token!.accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpMethod = "GET"
-        
-        //print("urlRequest Authorization: \(urlRequest.value(forHTTPHeaderField: "Authorization")!)")
-        
+        let urlRequest = constructUrlRequest(for: "trips", authorize: true , method: "GET", content: nil, accept: "application/json", body: nil)
+                
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse else { //, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
@@ -141,10 +141,7 @@ class JournalServiceLive: JournalService {
     }
     
     func getTrip(withId tripId: Trip.ID) async throws -> Trip {
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/trips/\(tripId)")!)
-        urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.setValue("\(token!.tokenType) \(token!.accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpMethod = "GET"
+        let urlRequest = constructUrlRequest(for: "trips/\(tripId)", authorize: true, method: "GET", content: nil, accept: "application/json", body: nil)
         
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
@@ -164,10 +161,11 @@ class JournalServiceLive: JournalService {
     }
     
     func updateTrip(withId tripId: Trip.ID, and request: TripUpdate) async throws -> Trip {
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/trips/\(tripId)")!)
-        urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.setValue("\(token!.tokenType) \(token!.accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpMethod = "PUT"
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        encoder.dateEncodingStrategy = .iso8601
+
+        let urlRequest = constructUrlRequest(for: "trips/\(tripId)", authorize: true, method: "PUT", content: nil, accept: "application/json", body: try encoder.encode(request))
         
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
@@ -187,11 +185,8 @@ class JournalServiceLive: JournalService {
     }
     
     func deleteTrip(withId tripId: Trip.ID) async throws {
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/trips/\(tripId)")!)
-        urlRequest.setValue("*/*", forHTTPHeaderField: "accept")
-        urlRequest.setValue("\(token!.tokenType) \(token!.accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpMethod = "DELETE"
-
+        let urlRequest = constructUrlRequest(for: "trips/\(tripId)", authorize: true, method: "DELETE", content: nil, accept: "*/*", body: nil)
+        
         let (_, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
             throw URLError(.badServerResponse)
@@ -199,15 +194,10 @@ class JournalServiceLive: JournalService {
     }
     
     func createEvent(with request: EventCreate) async throws -> Event {
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/events")!)
-        urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "content-type")
-        urlRequest.setValue("\(token!.tokenType) \(token!.accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpMethod = "POST"
-
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
-        urlRequest.httpBody = try encoder.encode(request)
+        
+        let urlRequest = constructUrlRequest(for: "events", authorize: true, method: "POST", content: "application/json", accept: "application/json", body: try encoder.encode(request))
         
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
@@ -227,16 +217,10 @@ class JournalServiceLive: JournalService {
     }
     
     func updateEvent(withId eventId: Event.ID, and request: EventUpdate) async throws -> Event {
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/events/\(eventId)")!)
-        urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "content-type")
-        urlRequest.setValue("\(token!.tokenType) \(token!.accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpMethod = "PUT"
-        
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
-        urlRequest.httpBody = try encoder.encode(request)
-        
+        let urlRequest = constructUrlRequest(for: "events/\(eventId)", authorize: true, method: "PUT", content: "application/json", accept: "application/json", body: try encoder.encode(request))
+                
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
@@ -256,11 +240,8 @@ class JournalServiceLive: JournalService {
     }
     
     func deleteEvent(withId eventId: Event.ID) async throws {
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/events/\(eventId)")!)
-        urlRequest.setValue("*/*", forHTTPHeaderField: "accept")
-        urlRequest.setValue("\(token!.tokenType) \(token!.accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpMethod = "DELETE"
-        
+        let urlRequest = constructUrlRequest(for: "events/\(eventId)", authorize: true, method: "DELETE", content: nil, accept: "*/*", body: nil)
+                
         let (_, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
             throw URLError(.badServerResponse)
@@ -268,16 +249,11 @@ class JournalServiceLive: JournalService {
     }
     
     func createMedia(with request: MediaCreate) async throws -> Media {
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/media")!)
-        urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "content-type")
-        urlRequest.setValue("\(token!.tokenType) \(token!.accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpMethod = "POST"
-
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
-        urlRequest.httpBody = try encoder.encode(request)
 
+        let urlRequest = constructUrlRequest(for: "media", authorize: true, method: "POST", content: "application/json", accept: "application/json", body: try encoder.encode(request))
+        
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
@@ -288,11 +264,8 @@ class JournalServiceLive: JournalService {
 }
     
     func deleteMedia(withId mediaId: Media.ID) async throws {
-        var urlRequest = URLRequest(url: URL(string: "http://localhost:8000/media/\(mediaId)")!)
-        urlRequest.setValue("*/*", forHTTPHeaderField: "accept")
-        urlRequest.setValue("\(token!.tokenType) \(token!.accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.httpMethod = "DELETE"
-        
+        let urlRequest = constructUrlRequest(for: "media/\(mediaId)", authorize: true, method: "DELETE", content: nil, accept: "*/*", body: nil)
+                
         let (_, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
             throw URLError(.badServerResponse)

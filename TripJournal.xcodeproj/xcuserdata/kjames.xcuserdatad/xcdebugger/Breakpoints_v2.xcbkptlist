@@ -14,8 +14,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "register(username:password:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "register(username:password:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "createTrip(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "createTrip(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "createTrip(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "getTrip(withId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,10 +142,40 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "getTrip(withId:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FEC45946-0098-478A-B216-B5C6696F45F8 - 7faa7e156bb159f9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for TripJournal.JournalServiceLive.getTrip(withId: Swift.Int) async throws -&gt; TripJournal.Trip"
+                  moduleName = "TripJournal.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "173"
+                  endingLineNumber = "173">
+               </Location>
+               <Location
+                  uuid = "FEC45946-0098-478A-B216-B5C6696F45F8 - 7faa7e156bb1a7c8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for TripJournal.JournalServiceLive.getTrip(withId: Swift.Int) async throws -&gt; TripJournal.Trip"
+                  moduleName = "TripJournal.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -158,13 +188,13 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "updateEvent(withId:and:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 3f3319246e064625"
+                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 3f3319246e0647d1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -174,11 +204,11 @@
                   urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "240"
-                  endingLineNumber = "240">
+                  startingLineNumber = "252"
+                  endingLineNumber = "252">
                </Location>
                <Location
-                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 751ed9fe7880ac42"
+                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 751ed9fe7880adb6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -188,8 +218,36 @@
                   urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "240"
-                  endingLineNumber = "240">
+                  startingLineNumber = "252"
+                  endingLineNumber = "252">
+               </Location>
+               <Location
+                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 3f3319246e064435"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for TripJournal.JournalServiceLive.updateEvent(withId: Swift.Int, and: TripJournal.EventUpdate) async throws -&gt; TripJournal.Event"
+                  moduleName = "TripJournal.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "224"
+                  endingLineNumber = "224">
+               </Location>
+               <Location
+                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 751ed9fe7880ae52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for TripJournal.JournalServiceLive.updateEvent(withId: Swift.Int, and: TripJournal.EventUpdate) async throws -&gt; TripJournal.Event"
+                  moduleName = "TripJournal.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "224"
+                  endingLineNumber = "224">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -204,8 +262,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "deleteTrip(withId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -220,8 +278,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "createMedia(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -256,36 +314,6 @@
             endingLineNumber = "122"
             landmarkName = "cell(for:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9F8A5B32-86B2-40FB-B040-E9BA2CC81FC3 - 58b40a0b43293d20"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; SwiftUI.Button&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;&gt; in TripJournal.MediaCarousel.cell(for: TripJournal.Media) -&gt; some"
-                  moduleName = "TripJournal.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/Events/MediaCarousel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122">
-               </Location>
-               <Location
-                  uuid = "9F8A5B32-86B2-40FB-B040-E9BA2CC81FC3 - 4040d905480645f9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #3 () -&gt; SwiftUI.Button&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;&gt; in TripJournal.MediaCarousel.cell(for: TripJournal.Media) -&gt; some"
-                  moduleName = "TripJournal.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/Events/MediaCarousel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "123"
-                  endingLineNumber = "123">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
