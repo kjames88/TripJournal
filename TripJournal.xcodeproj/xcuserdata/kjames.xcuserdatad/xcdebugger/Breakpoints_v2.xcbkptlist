@@ -14,8 +14,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "register(username:password:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "register(username:password:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -40,6 +40,22 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "F7AA3B50-F2D5-43BD-9AB9-923890D5520B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TripJournal/JournalService/JournalService+Live.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "getTrips()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "208A4136-341E-4755-B9B4-F1657C0DD1DA"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -55,55 +71,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "208A4136-341E-4755-B9B4-F1657C0DD1DA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TripJournal/JournalService/JournalService+Live.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "getTrips()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F73009C6-0563-4A2F-B162-A64F047A54C5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TripJournal/JournalService/JournalService+Live.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "createTrip(with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D71C832F-5EEF-4A05-8719-EF15EAEA52D2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TripJournal/JournalService/JournalService+Live.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "createTrip(with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8315EDA4-A174-4CF4-93DA-C31529EE1A39"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -119,6 +87,38 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "D71C832F-5EEF-4A05-8719-EF15EAEA52D2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TripJournal/JournalService/JournalService+Live.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "createTrip(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8315EDA4-A174-4CF4-93DA-C31529EE1A39"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TripJournal/JournalService/JournalService+Live.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "createTrip(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             uuid = "41547F98-F030-4963-9F95-8A84B1404D38"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -126,8 +126,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "getTrip(withId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -136,46 +136,16 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "FEC45946-0098-478A-B216-B5C6696F45F8"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "getTrip(withId:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "FEC45946-0098-478A-B216-B5C6696F45F8 - 7faa7e156bb159f9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for TripJournal.JournalServiceLive.getTrip(withId: Swift.Int) async throws -&gt; TripJournal.Trip"
-                  moduleName = "TripJournal.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "173"
-                  endingLineNumber = "173">
-               </Location>
-               <Location
-                  uuid = "FEC45946-0098-478A-B216-B5C6696F45F8 - 7faa7e156bb1a7c8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for TripJournal.JournalServiceLive.getTrip(withId: Swift.Int) async throws -&gt; TripJournal.Trip"
-                  moduleName = "TripJournal.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "158"
-                  endingLineNumber = "158">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -188,13 +158,41 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "updateEvent(withId:and:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 3f3319246e0647d1"
+                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 890b9a429f2140b5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for TripJournal.JournalServiceLive.deleteTrip(withId: Swift.Int) async throws -&gt; ()"
+                  moduleName = "TripJournal.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "202"
+                  endingLineNumber = "202">
+               </Location>
+               <Location
+                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 503a8580867f5ab6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for TripJournal.JournalServiceLive.deleteTrip(withId: Swift.Int) async throws -&gt; ()"
+                  moduleName = "TripJournal.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "202"
+                  endingLineNumber = "202">
+               </Location>
+               <Location
+                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 3f3319246e064922"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -204,11 +202,11 @@
                   urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "252"
-                  endingLineNumber = "252">
+                  startingLineNumber = "201"
+                  endingLineNumber = "201">
                </Location>
                <Location
-                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 751ed9fe7880adb6"
+                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 751ed9fe7880a345"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -218,36 +216,8 @@
                   urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "252"
-                  endingLineNumber = "252">
-               </Location>
-               <Location
-                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 3f3319246e064435"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for TripJournal.JournalServiceLive.updateEvent(withId: Swift.Int, and: TripJournal.EventUpdate) async throws -&gt; TripJournal.Event"
-                  moduleName = "TripJournal.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "224"
-                  endingLineNumber = "224">
-               </Location>
-               <Location
-                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 751ed9fe7880ae52"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for TripJournal.JournalServiceLive.updateEvent(withId: Swift.Int, and: TripJournal.EventUpdate) async throws -&gt; TripJournal.Event"
-                  moduleName = "TripJournal.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "224"
-                  endingLineNumber = "224">
+                  startingLineNumber = "201"
+                  endingLineNumber = "201">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -262,25 +232,9 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "deleteTrip(withId:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D131614F-2E0E-41B7-8A6A-8F9371483616"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TripJournal/JournalService/JournalService+Live.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "createMedia(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -11,7 +11,20 @@ import Foundation
 class JournalServiceLive: JournalService {
     @Published private var token: Token?
     private var trips: [Trip] = []
+    private var jsonEncoder: JSONEncoder
+    private var jsonDecoder: JSONDecoder
+    
 
+    init() {
+        jsonEncoder = JSONEncoder()
+        jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
+        jsonEncoder.dateEncodingStrategy = .iso8601
+        
+        jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        jsonDecoder.dateDecodingStrategy = .iso8601
+    }
+    
     var isAuthenticated: AnyPublisher<Bool, Never> {
         $token
             .map { $0 != nil }
@@ -39,20 +52,17 @@ class JournalServiceLive: JournalService {
     
     func register(username: String, password: String) async throws -> Token {
         let body = RegisterUser(username: username, password: password)
-        let encoded = try JSONEncoder().encode(body)
-        
+        //let encoded = try JSONEncoder().encode(body)
+        let encoded = try jsonEncoder.encode(body)
+
         let urlRequest = constructUrlRequest(for: "register", authorize: false, method: "POST", content: "application/json", accept: "application/json", body: encoded)
         
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
-        guard let httpResponse = response as? HTTPURLResponse else { //}, httpResponse.statusCode == 200 else {
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        print("status code: \(httpResponse.statusCode)")
         do {
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-            let token = try decoder.decode(Token.self, from: responseData)
+            let token = try jsonDecoder.decode(Token.self, from: responseData)
             return token
         } catch {
             let s = String(data: responseData, encoding: .utf8) ?? "no message"
@@ -72,10 +82,7 @@ class JournalServiceLive: JournalService {
             throw URLError(.badServerResponse)
         }
         do {
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-            token = try decoder.decode(Token.self, from: responseData)
+            token = try jsonDecoder.decode(Token.self, from: responseData)
             print("Login token: \(token!)")
             return token!
         } catch {
@@ -90,24 +97,16 @@ class JournalServiceLive: JournalService {
     }
     
     func createTrip(with request: TripCreate) async throws -> Trip {
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        
-        let encoded = try encoder.encode(request)
+        let encoded = try jsonEncoder.encode(request)
         let urlRequest = constructUrlRequest(for: "trips", authorize: true, method: "POST", content: "application/json", accept: "application/json", body: encoded)
               
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse else { //}, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        print("status code: \(httpResponse.statusCode)")
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .iso8601
         do {
-            let trip = try decoder.decode(Trip.self, from: responseData)
+            let trip = try jsonDecoder.decode(Trip.self, from: responseData)
             print("Trip: \(trip)")
-            //let newTrip = Trip(from: request)
             trips.append(trip)
             trips.sort()
             return trip
@@ -125,12 +124,8 @@ class JournalServiceLive: JournalService {
         guard let httpResponse = response as? HTTPURLResponse else { //, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        print("status code: \(httpResponse.statusCode)")
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .iso8601
         do {
-            let trips: [Trip] = try decoder.decode([Trip].self, from: responseData)
+            let trips: [Trip] = try jsonDecoder.decode([Trip].self, from: responseData)
             print("Trips: \(trips)")
             return trips
         } catch {
@@ -147,11 +142,8 @@ class JournalServiceLive: JournalService {
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .iso8601
         do {
-            let trip = try decoder.decode(Trip.self, from: responseData)
+            let trip = try jsonDecoder.decode(Trip.self, from: responseData)
             return trip
         } catch {
             let s = String(data: responseData, encoding: .utf8) ?? "no message"
@@ -161,21 +153,14 @@ class JournalServiceLive: JournalService {
     }
     
     func updateTrip(withId tripId: Trip.ID, and request: TripUpdate) async throws -> Trip {
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        encoder.dateEncodingStrategy = .iso8601
-
-        let urlRequest = constructUrlRequest(for: "trips/\(tripId)", authorize: true, method: "PUT", content: nil, accept: "application/json", body: try encoder.encode(request))
+        let urlRequest = constructUrlRequest(for: "trips/\(tripId)", authorize: true, method: "PUT", content: nil, accept: "application/json", body: try jsonEncoder.encode(request))
         
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .iso8601
         do {
-            let trip = try decoder.decode(Trip.self, from: responseData)
+            let trip = try jsonDecoder.decode(Trip.self, from: responseData)
             return trip
         } catch {
             let s = String(data: responseData, encoding: .utf8) ?? "no message"
@@ -194,20 +179,14 @@ class JournalServiceLive: JournalService {
     }
     
     func createEvent(with request: EventCreate) async throws -> Event {
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        
-        let urlRequest = constructUrlRequest(for: "events", authorize: true, method: "POST", content: "application/json", accept: "application/json", body: try encoder.encode(request))
+        let urlRequest = constructUrlRequest(for: "events", authorize: true, method: "POST", content: "application/json", accept: "application/json", body: try jsonEncoder.encode(request))
         
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .iso8601
         do {
-            let event = try decoder.decode(Event.self, from:responseData)
+            let event = try jsonDecoder.decode(Event.self, from:responseData)
             return event
         } catch {
             let s = String(data: responseData, encoding: .utf8) ?? "no message"
@@ -217,20 +196,15 @@ class JournalServiceLive: JournalService {
     }
     
     func updateEvent(withId eventId: Event.ID, and request: EventUpdate) async throws -> Event {
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        let urlRequest = constructUrlRequest(for: "events/\(eventId)", authorize: true, method: "PUT", content: "application/json", accept: "application/json", body: try encoder.encode(request))
+        let urlRequest = constructUrlRequest(for: "events/\(eventId)", authorize: true, method: "PUT", content: "application/json", accept: "application/json", body: try jsonEncoder.encode(request))
                 
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .iso8601
         
         do {
-            let event = try decoder.decode(Event.self, from: responseData)
+            let event = try jsonDecoder.decode(Event.self, from: responseData)
             return event
         } catch {
             let s = String(data: responseData, encoding: .utf8) ?? "no message"
@@ -249,18 +223,13 @@ class JournalServiceLive: JournalService {
     }
     
     func createMedia(with request: MediaCreate) async throws -> Media {
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-
-        let urlRequest = constructUrlRequest(for: "media", authorize: true, method: "POST", content: "application/json", accept: "application/json", body: try encoder.encode(request))
+        let urlRequest = constructUrlRequest(for: "media", authorize: true, method: "POST", content: "application/json", accept: "application/json", body: try jsonEncoder.encode(request))
         
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try decoder.decode(Media.self, from: responseData)
+        return try jsonDecoder.decode(Media.self, from: responseData)
 }
     
     func deleteMedia(withId mediaId: Media.ID) async throws {
