@@ -60,7 +60,9 @@ struct MediaCarousel: View {
                         return
                     }
                     additionHandler(imageData)
-                    imageItem = nil
+                    await MainActor.run {
+                        imageItem = nil
+                    }
                 }
             }
             .sheet(item: $selected) { selectedMedia in

@@ -46,8 +46,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "getTrips()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "getTrips()"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "createTrip(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "createTrip(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "createTrip(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "getTrip(withId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "getTrip(withId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,41 +158,13 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "updateEvent(withId:and:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 890b9a429f2140b5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for TripJournal.JournalServiceLive.deleteTrip(withId: Swift.Int) async throws -&gt; ()"
-                  moduleName = "TripJournal.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "202"
-                  endingLineNumber = "202">
-               </Location>
-               <Location
-                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 503a8580867f5ab6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for TripJournal.JournalServiceLive.deleteTrip(withId: Swift.Int) async throws -&gt; ()"
-                  moduleName = "TripJournal.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "202"
-                  endingLineNumber = "202">
-               </Location>
-               <Location
-                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 3f3319246e064922"
+                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 3f3319246e06490d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -202,11 +174,11 @@
                   urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "201"
-                  endingLineNumber = "201">
+                  startingLineNumber = "200"
+                  endingLineNumber = "200">
                </Location>
                <Location
-                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 751ed9fe7880a345"
+                  uuid = "66615BAF-DD8C-4B95-8B10-14C9AAB3D6B0 - 751ed9fe7880a36a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -216,8 +188,8 @@
                   urlString = "file:///Users/kjames/Code/Udacity/TripJournal/TripJournal/JournalService/JournalService+Live.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "201"
-                  endingLineNumber = "201">
+                  startingLineNumber = "200"
+                  endingLineNumber = "200">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -232,8 +204,8 @@
             filePath = "TripJournal/JournalService/JournalService+Live.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "deleteTrip(withId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -248,8 +220,8 @@
             filePath = "TripJournal/Events/MediaCarousel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "cell(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -264,8 +236,8 @@
             filePath = "TripJournal/Events/MediaCarousel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "cell(for:)"
             landmarkType = "7">
          </BreakpointContent>

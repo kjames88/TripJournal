@@ -235,14 +235,21 @@ struct EventForm: View {
                 transitionFromPrevious: transitionFromPrevious?.nonEmpty
             )
             try await journalService.createEvent(with: request)
+            //
+            // ChatGPT suggested this form with isLoading duplicated and MainActor.run on both branches of the do/catch
+            //   used many places in multiple files
+            //
             await MainActor.run {
                 updateHandler()
                 dismiss()
+                isLoading = false
             }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+                isLoading = false
+            }
         }
-        isLoading = false
     }
 
     private func editEvent(withId id: Event.ID) async {
@@ -260,11 +267,14 @@ struct EventForm: View {
             await MainActor.run {
                 updateHandler()
                 dismiss()
+                isLoading = false
             }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+                isLoading = false
+            }
         }
-        isLoading = false
     }
 
     private func deleteEvent(withId id: Event.ID) async {
@@ -274,10 +284,13 @@ struct EventForm: View {
             await MainActor.run {
                 updateHandler()
                 dismiss()
+                isLoading = false
             }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+                isLoading = false
+            }
         }
-        isLoading = false
     }
 }

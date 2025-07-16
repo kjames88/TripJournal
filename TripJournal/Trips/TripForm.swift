@@ -141,46 +141,43 @@ struct TripForm: View {
         }
     }
 
+    @MainActor
     private func addTrip() async {
         isLoading = true
         do {
             try validateForm()
             let request = TripCreate(name: name, startDate: startDate, endDate: endDate)
             try await journalService.createTrip(with: request)
-            await MainActor.run {
-                updateHandler()
-                dismiss()
-            }
+            updateHandler()
+            dismiss()
         } catch {
             self.error = error
         }
         isLoading = false
     }
 
+    @MainActor
     private func editTrip(withId id: Trip.ID) async {
         isLoading = true
         do {
             try validateForm()
             let request = TripUpdate(name: name, startDate: startDate, endDate: endDate)
             try await journalService.updateTrip(withId: id, and: request)
-            await MainActor.run {
-                updateHandler()
-                dismiss()
-            }
+            updateHandler()
+            dismiss()
         } catch {
             self.error = error
         }
         isLoading = false
     }
 
+    @MainActor
     private func deleteTrip(withId id: Trip.ID) async {
         isLoading = true
         do {
             try await journalService.deleteTrip(withId: id)
-            await MainActor.run {
-                updateHandler()
-                dismiss()
-            }
+            updateHandler()
+            dismiss()
         } catch {
             self.error = error
         }

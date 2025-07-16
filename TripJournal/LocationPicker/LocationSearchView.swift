@@ -53,7 +53,10 @@ struct LocationSearchView: View {
 
     private func handleSelection(for result: MKLocalSearchCompletion) {
         Task {
-            items = await service.items(for: result)
+            let items_ = await service.items(for: result)
+            await MainActor.run {
+                self.items = items_
+            }
         }
     }
 }

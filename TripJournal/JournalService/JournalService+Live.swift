@@ -10,7 +10,7 @@ import Foundation
 
 class JournalServiceLive: JournalService {
     @Published private var token: Token?
-    private var trips: [Trip] = []
+    //private var trips: [Trip] = []
     private var jsonEncoder: JSONEncoder
     private var jsonDecoder: JSONDecoder
     
@@ -62,8 +62,9 @@ class JournalServiceLive: JournalService {
             throw URLError(.badServerResponse)
         }
         do {
-            let token = try jsonDecoder.decode(Token.self, from: responseData)
-            return token
+            // does not populate self.token:  we are registering not loggin in
+            let token_ = try jsonDecoder.decode(Token.self, from: responseData)
+            return token_
         } catch {
             let s = String(data: responseData, encoding: .utf8) ?? "no message"
             print("Token decode failed: \(s)")
@@ -82,9 +83,10 @@ class JournalServiceLive: JournalService {
             throw URLError(.badServerResponse)
         }
         do {
-            token = try jsonDecoder.decode(Token.self, from: responseData)
+            let token_ = try jsonDecoder.decode(Token.self, from: responseData)
+            await MainActor.run { self.token = token_ }
             print("Login token: \(token!)")
-            return token!
+            return self.token!
         } catch {
             let s = String(data: responseData, encoding: .utf8) ?? "no message"
             print("Token decode failed: \(s)")
@@ -101,14 +103,13 @@ class JournalServiceLive: JournalService {
         let urlRequest = constructUrlRequest(for: "trips", authorize: true, method: "POST", content: "application/json", accept: "application/json", body: encoded)
               
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
-        guard let httpResponse = response as? HTTPURLResponse else { //}, httpResponse.statusCode == 200 else {
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
         do {
             let trip = try jsonDecoder.decode(Trip.self, from: responseData)
             print("Trip: \(trip)")
-            trips.append(trip)
-            trips.sort()
+            //trips.append(trip)
             return trip
         } catch {
             let s = String(data: responseData, encoding: .utf8) ?? "no message"
@@ -121,7 +122,7 @@ class JournalServiceLive: JournalService {
         let urlRequest = constructUrlRequest(for: "trips", authorize: true , method: "GET", content: nil, accept: "application/json", body: nil)
                 
         let (responseData, response) = try await URLSession.shared.data(for: urlRequest)
-        guard let httpResponse = response as? HTTPURLResponse else { //, httpResponse.statusCode == 200 else {
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
         do {

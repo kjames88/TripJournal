@@ -39,6 +39,7 @@ struct LocationPicker: View {
 
     // MARK: - Body
 
+    @MainActor
     var body: some View {
         NavigationView {
             Map(position: $position, selection: $selectedItem) {

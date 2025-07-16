@@ -116,10 +116,15 @@ struct TripDetails: View {
         do {
             try await journalService.createMedia(with: request)
             await reloadTrip()
+            await MainActor.run {
+                isLoading = false
+            }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+                isLoading = false
+            }
         }
-        isLoading = false
     }
 
     private func deleteMedia(withId mediaId: Media.ID) async {
@@ -127,19 +132,28 @@ struct TripDetails: View {
         do {
             try await journalService.deleteMedia(withId: mediaId)
             await reloadTrip()
+            await MainActor.run {
+                isLoading = false
+            }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+                isLoading = false
+            }
         }
-        isLoading = false
     }
 
     private func reloadTrip() async {
         let id = trip.id
         do {
             let updatedTrip = try await journalService.getTrip(withId: id)
-            trip = updatedTrip
+            await MainActor.run {
+                trip = updatedTrip
+            }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+            }
         }
     }
 
@@ -150,10 +164,13 @@ struct TripDetails: View {
             await MainActor.run {
                 deletionHandler()
                 dismiss()
+                isLoading = false
             }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+                isLoading = false
+            }
         }
-        isLoading = false
     }
 }
