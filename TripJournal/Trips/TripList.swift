@@ -131,7 +131,6 @@ struct TripList: View {
 
     // MARK: - Networking
 
-    @MainActor
     private func fetchTrips() async {
         if trips.isEmpty {
             isLoading = true
@@ -139,21 +138,30 @@ struct TripList: View {
         error = nil
         do {
             self.trips = try await journalService.getTrips()
+            await MainActor.run {
+                isLoading = false
+            }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+                isLoading = false
+            }
         }
-        isLoading = false
     }
 
-    @MainActor
     private func deleteTrip(withId id: Trip.ID) async {
         isLoading = true
         do {
             try await journalService.deleteTrip(withId: id)
             await fetchTrips()
+            await MainActor.run {
+                isLoading = false
+            }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+                isLoading = false
+            }
         }
-        isLoading = false
     }
 }
