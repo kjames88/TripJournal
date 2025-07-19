@@ -103,10 +103,15 @@ struct AuthView: View {
         do {
             try validateForm()
             try await journalService.logIn(username: username, password: password)
+            await MainActor.run {
+                isLoading = false
+            }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+                isLoading = false
+            }
         }
-        isLoading = false
     }
 
     private func register() async {
@@ -114,9 +119,14 @@ struct AuthView: View {
         do {
             try validateForm()
             try await journalService.register(username: username, password: password)
+            await MainActor.run {
+                isLoading = false
+            }
         } catch {
-            self.error = error
+            await MainActor.run {
+                self.error = error
+                isLoading = false
+            }
         }
-        isLoading = false
     }
 }
