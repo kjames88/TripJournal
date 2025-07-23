@@ -43,3 +43,12 @@ struct Media: Identifiable, Sendable, Hashable, Codable {
     var id: Int
     var url: URL?
 }
+
+struct TravelSegment: Identifiable, Sendable, Hashable, Codable {
+    var id: Int
+    var name: String
+    var startDate: Date
+    var endDate: Date?
+    var startLocation: Location
+    var endLocation: Location
+}
