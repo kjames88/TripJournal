@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct TransitForm: View {
+    @State private var mode: ItineraryView.Mode
     @State private var segment: TravelSegment?
     @State private var name: String = ""
     @State private var startDate: Date = Date()
@@ -17,8 +18,11 @@ struct TransitForm: View {
     @State private var selectStartLocation = true
     @State private var startLocation: Location?
     @State private var endLocation: Location?
-    
-    init(segment: TravelSegment? = nil) {
+
+    @Environment(\.dismiss) private var dismiss
+
+    init(mode: ItineraryView.Mode, segment: TravelSegment? = nil) {
+        self.mode = mode
         self.segment = segment
     }
     
@@ -44,6 +48,9 @@ struct TransitForm: View {
                     endLocation = selectedLocation
                 }
             }
+        }
+        Button("Save") {
+            segment = TravelSegment(id: 1, name: name, startDate: startDate, endDate: endDate, startLocation: startLocation!, endLocation: endLocation!)
         }
     }
     
@@ -110,8 +117,29 @@ struct TransitForm: View {
             Marker(location.address ?? "", coordinate: location.coordinate)
         }
     }
+    
+    @ToolbarContentBuilder
+    private func toolbar() -> some ToolbarContent {
+        ToolbarItem(placement: .cancellationAction) {
+            Button("Dismiss", systemImage: "xmark") {
+                dismiss()
+            }
+        }
+        ToolbarItem(placement: .primaryAction) {
+            Button("Save") {
+                switch mode {
+                case .add:
+                    Task {
+                    }
+                case let .edit(segment):
+                    Task {
+                    }
+                }
+            }
+        }
+    }
 }
 
 #Preview {
-    TransitForm()
+    TransitForm(mode: .add)
 }

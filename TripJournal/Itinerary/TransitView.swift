@@ -36,7 +36,7 @@ struct TransitView: View {
     
     private var nameLabel: some View {
         Text(segment.name)
-            .font(.title)
+            .font(.title2)
     }
        
     private var startDateLocationLabel: some View {
