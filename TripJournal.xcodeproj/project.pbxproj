@@ -30,9 +30,9 @@
 		07BCBA8F2B5D7EC500C6F687 /* MediaCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BCBA8E2B5D7EC500C6F687 /* MediaCarousel.swift */; };
 		07F6695D2B589A1E002F8D18 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F6695C2B589A1E002F8D18 /* AddButton.swift */; };
 		497D828C2E1B518C00925E74 /* JournalService+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497D828B2E1B518C00925E74 /* JournalService+Live.swift */; };
-		49C4A4212E2DF9FD004EB2C1 /* TransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C4A4202E2DF9FD004EB2C1 /* TransitView.swift */; };
-		49C4A4232E2F4632004EB2C1 /* ItineraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C4A4222E2F4632004EB2C1 /* ItineraryView.swift */; };
-		49C4A4252E30966F004EB2C1 /* TransitForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C4A4242E30966F004EB2C1 /* TransitForm.swift */; };
+		498811F32E35E45C00F962A7 /* ItineraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F91DF12E35E3A8007B1B0C /* ItineraryView.swift */; };
+		498811F42E35E46400F962A7 /* TransitForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F91DF22E35E3A8007B1B0C /* TransitForm.swift */; };
+		498811F52E35E46A00F962A7 /* TransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F91DF32E35E3A8007B1B0C /* TransitView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,9 +60,9 @@
 		07BCBA8E2B5D7EC500C6F687 /* MediaCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCarousel.swift; sourceTree = "<group>"; };
 		07F6695C2B589A1E002F8D18 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		497D828B2E1B518C00925E74 /* JournalService+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalService+Live.swift"; sourceTree = "<group>"; };
-		49C4A4202E2DF9FD004EB2C1 /* TransitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransitView.swift; path = TripJournal/Itinerary/TransitView.swift; sourceTree = "<group>"; };
-		49C4A4222E2F4632004EB2C1 /* ItineraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryView.swift; sourceTree = "<group>"; };
-		49C4A4242E30966F004EB2C1 /* TransitForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitForm.swift; sourceTree = "<group>"; };
+		49F91DF12E35E3A8007B1B0C /* ItineraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryView.swift; sourceTree = "<group>"; };
+		49F91DF22E35E3A8007B1B0C /* TransitForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitForm.swift; sourceTree = "<group>"; };
+		49F91DF32E35E3A8007B1B0C /* TransitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,11 +79,9 @@
 		075A90D62B446996009A1DCB = {
 			isa = PBXGroup;
 			children = (
-				49C4A4202E2DF9FD004EB2C1 /* TransitView.swift */,
-				49C4A4242E30966F004EB2C1 /* TransitForm.swift */,
-				49C4A4222E2F4632004EB2C1 /* ItineraryView.swift */,
 				075A90E12B446996009A1DCB /* TripJournal */,
 				075A90E02B446996009A1DCB /* Products */,
+				49F91DF42E35E3A8007B1B0C /* Itinerary */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,6 +179,17 @@
 			path = LocationPicker;
 			sourceTree = "<group>";
 		};
+		49F91DF42E35E3A8007B1B0C /* Itinerary */ = {
+			isa = PBXGroup;
+			children = (
+				49F91DF12E35E3A8007B1B0C /* ItineraryView.swift */,
+				49F91DF22E35E3A8007B1B0C /* TransitForm.swift */,
+				49F91DF32E35E3A8007B1B0C /* TransitView.swift */,
+			);
+			name = Itinerary;
+			path = TripJournal/Itinerary;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -254,12 +263,11 @@
 				0703FC7A2B493D5B0084DD8A /* LocationService.swift in Sources */,
 				0703FC722B457EF40084DD8A /* Models.swift in Sources */,
 				075A91012B446B17009A1DCB /* AuthView.swift in Sources */,
+				498811F32E35E45C00F962A7 /* ItineraryView.swift in Sources */,
 				0703FC742B4583B80084DD8A /* JournalService.swift in Sources */,
-				49C4A4212E2DF9FD004EB2C1 /* TransitView.swift in Sources */,
 				07AA89D72B5F251800405269 /* Requests.swift in Sources */,
-				49C4A4252E30966F004EB2C1 /* TransitForm.swift in Sources */,
+				498811F52E35E46A00F962A7 /* TransitView.swift in Sources */,
 				075A90E32B446996009A1DCB /* App.swift in Sources */,
-				49C4A4232E2F4632004EB2C1 /* ItineraryView.swift in Sources */,
 				075A90FD2B446AA9009A1DCB /* Utils.swift in Sources */,
 				075A90FF2B446AD6009A1DCB /* EventForm.swift in Sources */,
 				0703FC782B49351F0084DD8A /* LocationPicker.swift in Sources */,
@@ -273,6 +281,7 @@
 				075A90F52B446A41009A1DCB /* TripDetails.swift in Sources */,
 				497D828C2E1B518C00925E74 /* JournalService+Live.swift in Sources */,
 				075A90F32B446A18009A1DCB /* TripList.swift in Sources */,
+				498811F42E35E46400F962A7 /* TransitForm.swift in Sources */,
 				07BCBA8B2B5D65D200C6F687 /* JournalService+Environment.swift in Sources */,
 				075A90F92B446A6F009A1DCB /* TripCell.swift in Sources */,
 			);
