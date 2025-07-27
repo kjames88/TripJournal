@@ -9,72 +9,127 @@ import SwiftUI
 import MapKit
 
 struct TransitForm: View {
-    @State private var mode: ItineraryView.Mode
-    @State private var segment: TravelSegment?
-    @State private var name: String = ""
-    @State private var startDate: Date = Date()
-    @State private var endDate: Date = Date()
+    var mode: ItineraryView.Mode
+    @Binding var segment: TravelSegment
+    let onSave: (TravelSegment) -> Void
+    
+    //@State private var name: String = ""
+    //@State private var startDate: Date = Date()
+    //@State private var endDate: Date = Date()
     @State private var isLocationPickerPresented: Bool = false
     @State private var selectStartLocation = true
-    @State private var startLocation: Location?
-    @State private var endLocation: Location?
+    //@State private var startLocation: Location?
+    //@State private var endLocation: Location?
 
     @Environment(\.dismiss) private var dismiss
-
-    init(mode: ItineraryView.Mode, segment: TravelSegment? = nil) {
-        self.mode = mode
-        self.segment = segment
-    }
-    
+  
     var body: some View {
         Form {
             Section("Travel Segment") {
-                TextField("Name", text: $name)
+                TextField("Name", text: $segment.name)
             }
             Section("Departure") {
-                DatePicker("Depart", selection: $startDate)
+                DatePicker("Depart", selection: $segment.startDate)
+                departureLocation()
             }
-            locationSection(isStart: true)
             Section("Arrival") {
-                DatePicker("Arrive", selection: $endDate)
+                DatePicker("Arrive", selection: $segment.endDate)
+                destinationLocation()
             }
-            locationSection(isStart: false)
         }
         .sheet(isPresented: $isLocationPickerPresented) {
-            LocationPicker(location: selectStartLocation ? startLocation : endLocation) { selectedLocation in
+            LocationPicker(location: selectStartLocation ? segment.startLocation : segment.endLocation) { selectedLocation in
                 if selectStartLocation {
-                    startLocation = selectedLocation
+                    segment.startLocation = selectedLocation
                 } else {
-                    endLocation = selectedLocation
+                    segment.endLocation = selectedLocation
                 }
             }
         }
         Button("Save") {
-            segment = TravelSegment(id: 1, name: name, startDate: startDate, endDate: endDate, startLocation: startLocation!, endLocation: endLocation!)
+            switch mode {
+            case .add: segment.id = UUID()
+                break
+            case .edit: break
+            }
+            
+            onSave(segment)
+            dismiss()
+        }
+    }
+    
+//    @ViewBuilder
+//    private func locationSection(isStart: Bool) -> some View {
+//        let location = isStart ? segment.startLocation : segment.endLocation
+//        if let location = location {
+//            //Section {
+//                Button(
+//                    action: { isLocationPickerPresented = true },
+//                    label: {
+//                        map(location: location)
+//                    }
+//                )
+//                .buttonStyle(.plain)
+//                .containerRelativeFrame(.horizontal)
+//                .clipped()
+//                .listRowInsets(EdgeInsets())
+//                .frame(height: 150)
+//                
+//                editLocation(isStart: isStart)
+//                removeLocation(isStart: isStart)
+//            //}
+//        } else {
+//            addLocation(isStart: isStart)
+//        }
+//    }
+    
+    @ViewBuilder
+    private func departureLocation() -> some View {
+        if let location = segment.startLocation {
+            Button(
+                action: {
+                    selectStartLocation = true
+                    isLocationPickerPresented = true
+                },
+                label: {
+                    map(location: location)
+                }
+            )
+            .buttonStyle(.plain)
+            .containerRelativeFrame(.horizontal)
+            .clipped()
+            .listRowInsets(EdgeInsets())
+            .frame(height: 150)
+            
+            editLocation(isStart: true)
+            removeLocation(isStart: true)
+        } else {
+            addLocation(isStart: true)
         }
     }
     
     @ViewBuilder
-    private func locationSection(isStart: Bool) -> some View {
-        let location = isStart ? startLocation : endLocation
-        Section {
-            if let location {
-                Button(
-                    action: { isLocationPickerPresented = true },
-                    label: {
-                        map(location: location)
-                    }
-                )
-                .buttonStyle(.plain)
-                .containerRelativeFrame(.horizontal)
-                .clipped()
-                .listRowInsets(EdgeInsets())
-                .frame(height: 150)
-
-                removeLocation(isStart: isStart)
-            } else {
-                addLocation(isStart: isStart)
-            }
+    private func destinationLocation() -> some View {
+        if let location = segment.endLocation {
+            Button(
+                action: {
+                    selectStartLocation = false
+                    isLocationPickerPresented = true
+                },
+                label: {
+                    map(location: location)
+                }
+            )
+            .buttonStyle(.plain)
+            .containerRelativeFrame(.horizontal)
+            .clipped()
+            .listRowInsets(EdgeInsets())
+            .frame(height: 150)
+            
+            editLocation(isStart: false)
+            removeLocation(isStart: false)
+        } else {
+            addLocation(isStart: false)
         }
     }
     
@@ -91,14 +146,27 @@ struct TransitForm: View {
         )
     }
 
+    private func editLocation(isStart: Bool) -> some View {
+        Button(
+            action: {
+                isLocationPickerPresented = true
+                selectStartLocation = isStart
+            },
+            label: {
+                Text("Edit Location")
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+        )
+    }
+    
     private func removeLocation(isStart: Bool) -> some View {
         Button(
             role: .destructive,
             action: {
                 if isStart {
-                    startLocation = nil
+                    segment.startLocation = Location(latitude: 0, longitude: 0)
                 } else {
-                    endLocation = nil
+                    segment.endLocation = Location(latitude: 0, longitude: 0)
                 }
             },
             label: {
@@ -117,29 +185,9 @@ struct TransitForm: View {
             Marker(location.address ?? "", coordinate: location.coordinate)
         }
     }
-    
-    @ToolbarContentBuilder
-    private func toolbar() -> some ToolbarContent {
-        ToolbarItem(placement: .cancellationAction) {
-            Button("Dismiss", systemImage: "xmark") {
-                dismiss()
-            }
-        }
-        ToolbarItem(placement: .primaryAction) {
-            Button("Save") {
-                switch mode {
-                case .add:
-                    Task {
-                    }
-                case let .edit(segment):
-                    Task {
-                    }
-                }
-            }
-        }
-    }
 }
 
 #Preview {
-    TransitForm(mode: .add)
+    @Previewable @State var segment: TravelSegment = TravelSegment(id: UUID(), name: "Fly to Paris", startDate: Date(), endDate: Date(), startLocation: nil, endLocation: nil)
+    TransitForm(mode: .add, segment: $segment, onSave: {_ in })
 }

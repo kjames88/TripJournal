@@ -30,12 +30,13 @@ struct ItineraryView: View {
     }
     
     @State private var mode: Mode?
+    @State private var newSegment = TravelSegment(id: UUID(), name: "Template", startDate: Date(), endDate: Date(), startLocation: nil, endLocation: nil)
     @State private var segments: [TravelSegment]
     
     var body: some View {
         VStack {
-        Text("Travel Itinerary")
-            .font(.title)
+            Text("Travel Itinerary")
+                .font(.title)
             Spacer()
             ScrollView {
                 ForEach(segments) { segment in
@@ -52,16 +53,18 @@ struct ItineraryView: View {
             addAction = { mode = .add }
         }
         .sheet(item: $mode) { mode in
-            TransitForm(mode: mode)
+            TransitForm(mode: mode, segment: $newSegment, onSave: { x in
+                segments.append(x)
+            })
         }
     }    
 }
 
 #Preview {
     ItineraryView(segments: [
-        TravelSegment(id: 1, name: "Fly to Paris", startDate: Date(), endDate: nil, startLocation: Location(latitude: 0, longitude: 0), endLocation: Location(latitude: 0, longitude: 0)),
-        TravelSegment(id: 2, name: "Train to Nice", startDate: Date(), endDate: nil, startLocation: Location(latitude: 0, longitude: 0), endLocation: Location(latitude: 0, longitude: 0)),
-         TravelSegment(id: 3, name: "Drive to Nimes", startDate: Date(), endDate: nil, startLocation: Location(latitude: 0, longitude: 0), endLocation: Location(latitude: 0, longitude: 0)),
-         TravelSegment(id: 4, name: "Train to Paris", startDate: Date(), endDate: nil, startLocation: Location(latitude: 0, longitude: 0), endLocation: Location(latitude: 0, longitude: 0))
+        TravelSegment(id: UUID(), name: "Fly to Paris", startDate: Date(), endDate: Date(), startLocation: Location(latitude: 0, longitude: 0), endLocation: Location(latitude: 0, longitude: 0)),
+        TravelSegment(id: UUID(), name: "Train to Nice", startDate: Date(), endDate: Date(), startLocation: Location(latitude: 0, longitude: 0), endLocation: Location(latitude: 0, longitude: 0)),
+         TravelSegment(id: UUID(), name: "Drive to Nimes", startDate: Date(), endDate: Date(), startLocation: Location(latitude: 0, longitude: 0), endLocation: Location(latitude: 0, longitude: 0)),
+         TravelSegment(id: UUID(), name: "Train to Paris", startDate: Date(), endDate: Date(), startLocation: Location(latitude: 0, longitude: 0), endLocation: Location(latitude: 0, longitude: 0))
         ])
 }
