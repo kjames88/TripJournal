@@ -1,6 +1,6 @@
 # Udacity Swift ND
 ## Trip Journal Project
-This project extends the starter code to use a server API for authentication and data persistence.  The majority of the UI code is provided in the starter.  However, access to an experimental Itinerary page has been added.
+This project extends the starter code to use a server API for authentication and data persistence.  The majority of the UI code is provided in the starter.  However, access to an experimental Itinerary page has been added.  **Note:** there is no persistence for Itinerary (support not added to the server).
 * Button on the Auth page
 * *One-way* access to the Itinerary View
 * Travel Itinerary
