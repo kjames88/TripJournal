@@ -15,19 +15,25 @@ struct AuthView: View {
     @State private var error: Error?
 
     @Environment(\.journalService) private var journalService
+    
+    @State private var showItineraryView: Bool = false
 
     // MARK: - Body
 
     var body: some View {
-        Form {
-            Section(
-                content: inputs,
-                header: header,
-                footer: buttons
-            )
+        if showItineraryView {
+            ItineraryView(segments: [])
+        } else {
+            Form {
+                Section(
+                    content: inputs,
+                    header: header,
+                    footer: buttons
+                )
+            }
+            .loadingOverlay(isLoading)
+            .alert(error: $error)
         }
-        .loadingOverlay(isLoading)
-        .alert(error: $error)
     }
 
     // MARK: - Views
@@ -78,6 +84,18 @@ struct AuthView: View {
                 },
                 label: {
                     Text("Create Account")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            )
+            .buttonBorderShape(.capsule)
+            .buttonStyle(.bordered)
+            Spacer()
+            Button(
+                action: {
+                    showItineraryView = true
+                },
+                label: {
+                    Text("Try Itinerary (Experimental)")
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             )
