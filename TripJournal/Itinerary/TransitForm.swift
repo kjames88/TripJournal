@@ -13,16 +13,11 @@ struct TransitForm: View {
     @Binding var segment: TravelSegment
     let onSave: (TravelSegment) -> Void
     
-    //@State private var name: String = ""
-    //@State private var startDate: Date = Date()
-    //@State private var endDate: Date = Date()
     @State private var isLocationPickerPresented: Bool = false
     @State private var selectStartLocation = true
-    //@State private var startLocation: Location?
-    //@State private var endLocation: Location?
 
     @Environment(\.dismiss) private var dismiss
-  
+    
     var body: some View {
         Form {
             Section("Travel Segment") {
@@ -38,50 +33,32 @@ struct TransitForm: View {
             }
         }
         .sheet(isPresented: $isLocationPickerPresented) {
-            LocationPicker(location: selectStartLocation ? segment.startLocation : segment.endLocation) { selectedLocation in
-                if selectStartLocation {
-                    segment.startLocation = selectedLocation
-                } else {
-                    segment.endLocation = selectedLocation
-                }
+            let displayLocation = selectStartLocation ? segment.startLocation : segment.endLocation
+            LocationPicker(location: displayLocation) { selectedLocation in
+                segment.startLocation = selectStartLocation ? selectedLocation : segment.startLocation
+                segment.endLocation = selectStartLocation ? segment.endLocation : selectedLocation
             }
         }
-        Button("Save") {
-            switch mode {
-            case .add: segment.id = UUID()
-                break
-            case .edit: break
+        HStack {
+            Spacer()
+            Button("Save") {
+                switch mode {
+                case .add:
+                    segment.id = UUID()
+                default:
+                    break
+                }
+                onSave(segment)
+                dismiss()
             }
-            
-            onSave(segment)
-            dismiss()
+            Spacer()
+            Button("Cancel") {
+                dismiss()
+            }
+            Spacer()
         }
     }
-    
-//    @ViewBuilder
-//    private func locationSection(isStart: Bool) -> some View {
-//        let location = isStart ? segment.startLocation : segment.endLocation
-//        if let location = location {
-//            //Section {
-//                Button(
-//                    action: { isLocationPickerPresented = true },
-//                    label: {
-//                        map(location: location)
-//                    }
-//                )
-//                .buttonStyle(.plain)
-//                .containerRelativeFrame(.horizontal)
-//                .clipped()
-//                .listRowInsets(EdgeInsets())
-//                .frame(height: 150)
-//                
-//                editLocation(isStart: isStart)
-//                removeLocation(isStart: isStart)
-//            //}
-//        } else {
-//            addLocation(isStart: isStart)
-//        }
-//    }
+
     
     @ViewBuilder
     private func departureLocation() -> some View {
@@ -164,9 +141,9 @@ struct TransitForm: View {
             role: .destructive,
             action: {
                 if isStart {
-                    segment.startLocation = Location(latitude: 0, longitude: 0)
+                    segment.startLocation = nil
                 } else {
-                    segment.endLocation = Location(latitude: 0, longitude: 0)
+                    segment.endLocation = nil
                 }
             },
             label: {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ItineraryView: View {
     @State var addAction: () -> Void = {}
+    @State var defaultSegment: TravelSegment = .init(id: UUID(), name: "", startDate: Date(), endDate: Date(), startLocation: nil, endLocation: nil)
 
     enum Mode: Identifiable {
         case add
@@ -30,7 +31,6 @@ struct ItineraryView: View {
     }
     
     @State private var mode: Mode?
-    @State private var newSegment = TravelSegment(id: UUID(), name: "Template", startDate: Date(), endDate: Date(), startLocation: nil, endLocation: nil)
     @State private var segments: [TravelSegment]
     
     var body: some View {
@@ -39,8 +39,11 @@ struct ItineraryView: View {
                 .font(.title)
             Spacer()
             ScrollView {
-                ForEach(segments) { segment in
-                    TransitView(segment: segment)
+                ForEach($segments) { $segment in
+                    TransitView(segment: $segment, edit: {
+                        self.defaultSegment = segment
+                        self.mode = .edit(segment)
+                    })
                 }
                 Spacer()
             }
@@ -53,9 +56,17 @@ struct ItineraryView: View {
             addAction = { mode = .add }
         }
         .sheet(item: $mode) { mode in
-            TransitForm(mode: mode, segment: $newSegment, onSave: { x in
-                segments.append(x)
-            })
+            if case .add = mode {
+                TransitForm(mode: mode, segment: $defaultSegment, onSave: { seg in
+                    segments.append(seg)
+                })
+            } else if case .edit(let editSegment) = mode {
+                TransitForm(mode: mode, segment: $defaultSegment, onSave: { seg in
+                    if let idx = segments.firstIndex(of: editSegment) {
+                        segments[idx] = seg
+                    }
+                })
+            }
         }
     }    
 }

@@ -9,16 +9,25 @@ import SwiftUI
 import MapKit
 
 struct TransitView: View {
-    @State private var segment: TravelSegment
-    
-    init(segment: TravelSegment) {
-        self.segment = segment
-    }
-    
+    // From ChatGPT:  @Binding is necessary to create a read-write reference
+    //   @State is only for local data (useful when this View manages this data)
+    // @State does NOT trigger update to the view when segment is changed in ItineraryView
+    //   unless the id field is replaced.
+    @Binding var segment: TravelSegment
+    let edit: () -> Void
+   
     var body: some View {
         VStack(alignment: .center, spacing: 32) {
-            nameLabel
-            Spacer()
+            // From ChatGPT:
+            // The ZStack alignment of .trailing ensures that views that don’t take the full width (like the Button) will be anchored to the trailing side.
+            ZStack(alignment: .trailing) {
+                nameLabel
+                Button("Edit", systemImage: "pencil", action: edit)
+                    .buttonBorderShape(.circle)
+                    .buttonStyle(.bordered)
+                    .font(.callout)
+            }
+            .padding()
             startDateLocationLabel
             endDateLocationLabel
             Spacer()
@@ -37,6 +46,7 @@ struct TransitView: View {
     private var nameLabel: some View {
         Text(segment.name)
             .font(.title2)
+            .frame(maxWidth: .infinity)
     }
        
     private var startDateLocationLabel: some View {
@@ -87,5 +97,5 @@ struct TransitView: View {
 }
 
 #Preview {
-    TransitView(segment: TravelSegment(id: UUID(), name: "Fly to Paris", startDate: Date(), endDate: Date(), startLocation: Location(latitude: 37.7749, longitude: -122.4194), endLocation: Location(latitude: 48.8575, longitude: 2.3514)))
+    TransitView(segment: .constant(TravelSegment(id: UUID(), name: "Fly to Paris", startDate: Date(), endDate: Date(), startLocation: Location(latitude: 37.7749, longitude: -122.4194), endLocation: Location(latitude: 48.8575, longitude: 2.3514))), edit: {})
 }
